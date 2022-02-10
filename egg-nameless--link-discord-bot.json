@@ -1,0 +1,95 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-02-10T14:14:25+01:00",
+    "name": "Nameless-Link Discord Bot",
+    "author": "pierre@tmkc.tld",
+    "description": "The official Pterodactyl egg for the NamelessMC Discord bot (\"Nameless-Link\").",
+    "features": null,
+    "images": [
+        "namelessmc\/discord-link:3"
+    ],
+    "file_denylist": [],
+    "startup": "java -Xmx{{MEMORY}}M -jar {{JARFILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"[main] INFO Core - JDA connected!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Entering the server folder\r\ncd \/mnt\/server\r\n\r\n# Starting container update\r\napt update -y\r\n\r\n# installing WGET to pull the latest Nameless-Link JAR file from official repository\r\napt install wget -y\r\n\r\n# Downloading the latest Nameless-Link JAR file from the official repository and naming it after the \"Jar File\" name set upon server creation\r\nwget https:\/\/ci.rkslot.nl\/job\/Nameless%20Link\/lastSuccessfulBuild\/artifact\/target\/Nameless-Link.jar -O ${JARFILE}",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "Get the token by creating a bot at https:\/\/discord.com\/developers\/applications\/",
+            "env_variable": "DISCORD_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Website API URL",
+            "description": "NamelessMC Install -> StaffCP -> Configuration -> API",
+            "env_variable": "API_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Bot URL",
+            "description": "Example: http:\/\/SERVER-IP:SERVER-PORT",
+            "env_variable": "BOT_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Discord Server ID",
+            "description": "Get the ID by right-clicking on the Discord Server then clicking \"Copy ID\"",
+            "env_variable": "GUILD_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Default Language",
+            "description": "See the available languages here: https:\/\/github.com\/NamelessMC\/Nameless-Link\/tree\/master\/src\/main\/resources\/languages",
+            "env_variable": "DEFAULT_LANGUAGE",
+            "default_value": "en_UK",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Memory",
+            "description": "Set as the same as the amount of RAM you allocated to the server",
+            "env_variable": "MEMORY",
+            "default_value": "256",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Jar File",
+            "description": "Set the name of the Nameless-Link JAR file (has to end with .jar)",
+            "env_variable": "JARFILE",
+            "default_value": "nameless.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30"
+        }
+    ]
+}
